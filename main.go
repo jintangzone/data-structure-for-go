@@ -1,13 +1,72 @@
 package main
 
 import (
-	"data_structure/Array"
+	"data_structure/linear"
+	"data_structure/linear/core"
 	"fmt"
 )
 
 func main() {
 
-	arr := Array.NewArray(20)
+	// Array
+	// testArray()
+
+	// ArrayStack
+	// testArrayStack()
+
+	// ArrayQueue
+	//testArrayQueue()
+
+	// ArrayLoopQueue
+	testArrayLoopQueue()
+}
+
+func testArrayLoopQueue()  {
+	loopQueue := linear.NewArrayLoopQueue(10)
+
+	for i := 0; i < 5; i++ {
+		loopQueue.EnQueue(i)
+	}
+	fmt.Println(loopQueue.ToString())
+	loopQueue.DeQueue()
+	fmt.Println(loopQueue.ToString())
+}
+
+func testArrayQueue()  {
+
+	queue := linear.NewArrayQueue(20)
+
+	for i := 0; i < 10; i++ {
+		queue.EnQueue(i)
+	}
+	fmt.Println(queue.ToString())
+
+	queue.DeQueue()
+	fmt.Println(queue.ToString())
+}
+
+func testArrayStack()  {
+
+	arrStack := linear.NewArrayStack(20)
+
+	for i := 0; i < 10; i++ {
+		arrStack.Push(i)
+	}
+
+	fmt.Println(arrStack.ToString())
+
+	arrStack.Pop()
+
+	fmt.Println(arrStack.ToString())
+	arrStack.Pop()
+	arrStack.Pop()
+	arrStack.Pop()
+	fmt.Println(arrStack.ToString())
+}
+
+func testArray() {
+
+	arr := core.NewArray(20)
 	for i := 0; i < 10; i++ {
 		arr.Append(i)
 	}
@@ -45,7 +104,7 @@ func main() {
 
 	fmt.Println()
 	fmt.Println("New String Array:")
-	arrStr := Array.NewArray(10)
+	arrStr := core.NewArray(10)
 
 	arrStr.Append("php")
 	arrStr.Append("java")
@@ -84,7 +143,7 @@ func main() {
 		age byte
 	}
 
-	boyArr := Array.NewArray(10)
+	boyArr := core.NewArray(10)
 
 	kenny := Boy{name: "kenny", age:20}
 	kern := Boy{name: "kern", age:22}
@@ -123,7 +182,7 @@ func main() {
 	fmt.Println("Delete Element You:", boyArr.DeleteElement(You))
 	fmt.Println(boyArr.ToString())
 
-	arrAuto := Array.NewArray(5)
+	arrAuto := core.NewArray(5)
 
 	arrAuto.Append(1)
 	arrAuto.Append(2)

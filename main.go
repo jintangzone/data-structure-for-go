@@ -78,4 +78,72 @@ func main() {
 
 	fmt.Println("Delete Element objectc:", arrStr.DeleteElement("objectc"))
 	fmt.Println(arrStr.ToString())
+
+	type Boy struct {
+		name string
+		age byte
+	}
+
+	boyArr := Array.NewArray(10)
+
+	kenny := Boy{name: "kenny", age:20}
+	kern := Boy{name: "kern", age:22}
+	jiekeng := Boy{name: "jiekeng", age:30}
+	You := Boy{name: "You", age:29}
+	Joe := Boy{name: "Joe", age:30}
+	Tim := Boy{name: "Tim", age:34}
+
+	boyArr.Append(kenny)
+	boyArr.Append(kern)
+	boyArr.Append(jiekeng)
+	boyArr.Append(You)
+	boyArr.Append(Joe)
+	boyArr.Append(Tim)
+
+	fmt.Println(boyArr.ToString())
+
+	boyArr.Set(2, Boy{name: "halo", age: 33})
+	fmt.Println(boyArr.ToString())
+
+	fmt.Println("Get Index = 2:", boyArr.Get(2))
+
+	fmt.Println("Array contains keeny ?", boyArr.Contains(kenny))
+	fmt.Println("Array contains javascript ?", boyArr.Contains(Boy{name:"fan", age:10}))
+	fmt.Println("index of joe =", boyArr.Index(Joe))
+
+	fmt.Println("Delete index 2 =", boyArr.Delete(2))
+	fmt.Println(boyArr.ToString())
+
+	fmt.Println("Pop: ", boyArr.Pop())
+	fmt.Println(boyArr.ToString())
+
+	fmt.Println("UnShift: ", boyArr.UnShift())
+	fmt.Println(boyArr.ToString())
+
+	fmt.Println("Delete Element You:", boyArr.DeleteElement(You))
+	fmt.Println(boyArr.ToString())
+
+	arrAuto := Array.NewArray(5)
+
+	arrAuto.Append(1)
+	arrAuto.Append(2)
+	arrAuto.Append(3)
+	arrAuto.Append(4)
+	arrAuto.Append(5)
+
+	fmt.Println(arrAuto.ToString())
+	arrAuto.Append(6)
+	arrAuto.Append(7)
+	arrAuto.Append(8)
+	fmt.Println(arrAuto.ToString())
+	arrAuto.Pop()
+	arrAuto.Pop()
+	arrAuto.Pop()
+	arrAuto.Pop()
+	arrAuto.Pop()
+	fmt.Println(arrAuto.ToString())
+
+	arrAuto.Pop()
+	arrAuto.Pop()
+	fmt.Println(arrAuto.ToString())
 }

@@ -38,7 +38,7 @@ func (arr *Array) Append(e interface{}) {
 
 func (arr *Array) Insert(index int, e interface{})  {
 	if arr.size == cap(arr.data) {
-		panic("Insert Failed, Array is full.")
+		arr.Resize(arr.size*2)
 	}
 	if index < 0 || index > arr.size {
 		panic("Insert Failed, Out of range Index.")
@@ -98,6 +98,11 @@ func (arr *Array) Delete(index int) interface{} {
 		arr.data[i-1] = arr.data[i]
 	}
 	arr.size--
+	arr.data[arr.size] = nil
+
+	if arr.size == cap(arr.data)/2 {
+		arr.Resize(cap(arr.data)/2)
+	}
 	return ret
 }
 
@@ -116,4 +121,10 @@ func (arr *Array) DeleteElement(e interface{}) bool {
 		return true
 	}
 	return false
+}
+
+func (arr *Array) Resize(capacity int) {
+	newData := make([]interface{}, capacity)
+	copy(newData, arr.data)
+	arr.data = newData
 }

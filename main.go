@@ -2,8 +2,10 @@ package main
 
 import (
 	"data_structure/linear"
-	"data_structure/linear/core"
+	"data_structure/core"
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func main() {
@@ -18,7 +20,84 @@ func main() {
 	//testArrayQueue()
 
 	// ArrayLoopQueue
-	testArrayLoopQueue()
+	// testArrayLoopQueue()
+
+	// queue pk
+	//opCount := 100000
+	//queue := linear.NewArrayQueue(opCount)
+	//testQueue(queue, opCount)
+	//loopQueue := linear.NewArrayLoopQueue(opCount)
+	//testQueue(loopQueue, opCount)
+
+	// linkedList
+	// testLinkedlist()
+
+	// LinkedListStack
+	// testLinkedListStack()
+
+	// stack pk
+	opCount := 10000
+	stack := linear.NewArrayStack(opCount)
+	fmt.Printf("ArrayStack execute times: %.6fs\n", testStack(stack, opCount))
+	linkedStack := linear.NewLinkedListStack()
+	fmt.Printf("LinkedListStack execute times: %.6fs\n", testStack(linkedStack, opCount))
+}
+
+func testLinkedListStack()  {
+	stack := linear.NewLinkedListStack()
+	for i := 0; i < 5; i++ {
+		stack.Push(i)
+		fmt.Println(stack.ToString())
+	}
+
+	stack.Pop()
+	fmt.Println(stack.ToString())
+}
+
+func testLinkedlist()  {
+	link := core.NewLinkedList()
+	for i := 0; i < 5; i++ {
+		link.AddFirst(i)
+		fmt.Println(link.ToString())
+	}
+	link.Insert(3, 999)
+	fmt.Println(link.ToString())
+
+	link.Remove(3)
+	fmt.Println(link.ToString())
+
+	link.RemoveFirst()
+	fmt.Println(link.ToString())
+
+	link.RemoveLast()
+	fmt.Println(link.ToString())
+
+}
+
+func testStack(q core.Stack, opCount int) float32 {
+	startTime := time.Now().UnixNano()
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		q.Push(r.Intn(opCount))
+	}
+	for i := 0; i < opCount; i++ {
+		q.Pop()
+	}
+	endTime := time.Now().UnixNano()
+	return float32(endTime-startTime)/1000000000.0
+}
+
+func testQueue(q core.Queue, opCount int) float32 {
+	startTime := time.Now().UnixNano()
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		q.EnQueue(r.Intn(opCount))
+	}
+	for i := 0; i < opCount; i++ {
+		q.DeQueue()
+	}
+	endTime := time.Now().UnixNano()
+	return float32(endTime-startTime)/1000000000.0
 }
 
 func testArrayLoopQueue()  {

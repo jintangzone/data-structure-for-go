@@ -1,7 +1,7 @@
 package linear
 
 import (
-	"data_structure/linear/core"
+	"data_structure/core"
 	"fmt"
 	"strings"
 )

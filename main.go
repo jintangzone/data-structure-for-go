@@ -1,8 +1,8 @@
 package main
 
 import (
-	"data_structure/linear"
 	"data_structure/core"
+	"data_structure/linear"
 	"fmt"
 	"math/rand"
 	"time"
@@ -25,9 +25,11 @@ func main() {
 	// queue pk
 	//opCount := 100000
 	//queue := linear.NewArrayQueue(opCount)
-	//testQueue(queue, opCount)
+	//fmt.Printf("ArrayQueue execute times: %.6fs\n", testQueue(queue, opCount))
 	//loopQueue := linear.NewArrayLoopQueue(opCount)
-	//testQueue(loopQueue, opCount)
+	//fmt.Printf("ArrayLoopQueue execute times: %.6fs\n", testQueue(loopQueue, opCount))
+	//linkedListQueue := linear.NewLinkedListQueue()
+	//fmt.Printf("ArrayLinkedListQueue execute times: %.6fs\n", testQueue(linkedListQueue, opCount))
 
 	// linkedList
 	// testLinkedlist()
@@ -36,11 +38,33 @@ func main() {
 	// testLinkedListStack()
 
 	// stack pk
-	opCount := 10000
-	stack := linear.NewArrayStack(opCount)
-	fmt.Printf("ArrayStack execute times: %.6fs\n", testStack(stack, opCount))
-	linkedStack := linear.NewLinkedListStack()
-	fmt.Printf("LinkedListStack execute times: %.6fs\n", testStack(linkedStack, opCount))
+	//opCount := 10000
+	//stack := linear.NewArrayStack(opCount)
+	//fmt.Printf("ArrayStack execute times: %.6fs\n", testStack(stack, opCount))
+	//linkedStack := linear.NewLinkedListStack()
+	//fmt.Printf("LinkedListStack execute times: %.6fs\n", testStack(linkedStack, opCount))
+
+	// linkedListQueue
+	// testLinkedListQueue()
+
+	fmt.Println(sum([]int{1,2,3,4,5,6,7,8,9,10}, 0))
+}
+
+func sum(arr []int, index int) int {
+	if index == len(arr) {
+		return 0
+	}
+	return arr[index] + sum(arr, index+1)
+}
+
+func testLinkedListQueue()  {
+	linkedlistQueue := linear.NewLinkedListQueue()
+	for i := 0; i < 5; i++ {
+		linkedlistQueue.EnQueue(i)
+	}
+	fmt.Println(linkedlistQueue.ToString())
+	linkedlistQueue.DeQueue()
+	fmt.Println(linkedlistQueue.ToString())
 }
 
 func testLinkedListStack()  {

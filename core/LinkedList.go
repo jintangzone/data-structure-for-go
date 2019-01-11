@@ -2,20 +2,20 @@ package core
 
 import "fmt"
 
-type node struct {
-	Next *node
+type Node struct {
+	Next *Node
 	E interface{}
 }
 
-func NewNode(e interface{}, next *node) *node {
-	n := new(node)
+func NewNode(e interface{}, next *Node) *Node {
+	n := new(Node)
 	n.E = e
 	n.Next = next
 	return n
 }
 
 type LinkedList struct {
-	dummyHead *node
+	dummyHead *Node
 	size int
 }
 

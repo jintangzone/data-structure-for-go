@@ -20,7 +20,7 @@ func main() {
 	//testArrayQueue()
 
 	// ArrayLoopQueue
-	// testArrayLoopQueue()
+	testArrayLoopQueue()
 
 	// queue pk
 	//opCount := 100000
@@ -46,8 +46,6 @@ func main() {
 
 	// linkedListQueue
 	// testLinkedListQueue()
-
-	fmt.Println(sum([]int{1,2,3,4,5,6,7,8,9,10}, 0))
 }
 
 func sum(arr []int, index int) int {

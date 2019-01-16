@@ -3,6 +3,8 @@ package main
 import (
 	"data_structure/core"
 	"data_structure/linear"
+	"data_structure/set"
+	"data_structure/tree"
 	"fmt"
 	"math/rand"
 	"time"
@@ -20,7 +22,7 @@ func main() {
 	//testArrayQueue()
 
 	// ArrayLoopQueue
-	testArrayLoopQueue()
+	//testArrayLoopQueue()
 
 	// queue pk
 	//opCount := 100000
@@ -46,6 +48,86 @@ func main() {
 
 	// linkedListQueue
 	// testLinkedListQueue()
+
+	// binary search tree
+	// testBSTree()
+
+	// Set
+	// testSet()
+
+	// BST Set VS Linked Set
+	bstSet := set.NewBSTSet()
+	fmt.Printf("BST set, execute: %.4f \n", testSetTime(bstSet, 100000))
+	linkSet := set.NewLinkedSet()
+	fmt.Printf("Linked set, execute: %.4f \n", testSetTime(linkSet, 100000))
+
+}
+func testSetTime(s core.Set, opCount int) float32 {
+	startTime := time.Now().UnixNano()
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		s.Add(r.Intn(opCount))
+	}
+	endTime := time.Now().UnixNano()
+	return float32(endTime-startTime)/1000000000.0
+}
+
+func testSet()  {
+
+	bstSet := set.NewBSTSet()
+	linkSet := set.NewLinkedSet()
+
+	strs := []string{ "php", "java", "golang", "object-c", "clang", "cpp", "java" }
+	for _, str := range strs {
+		bstSet.Add(str)
+		linkSet.Add(str)
+	}
+
+	fmt.Println(bstSet.ToString())
+	fmt.Println(linkSet.ToString())
+
+	bstSet.Remove("php")
+	linkSet.Remove("php")
+
+	fmt.Println(bstSet.ToString())
+	fmt.Println(linkSet.ToString())
+}
+
+func testBSTree()  {
+	bst := tree.NewBST()
+	nums := []int{5,3,6,8,4,2}
+	for _, n := range nums {
+		bst.Add(n)
+	}
+
+	//bst.PreOrderNR(func(e interface{}) {
+	//	fmt.Println(e)
+	//})
+	//fmt.Println()
+	//
+	//bst.InOrder(func(e interface{}) {
+	//	fmt.Println(e)
+	//})
+	//fmt.Println()
+	//
+	//bst.BackOrder(func(e interface{}) {
+	//	fmt.Println(e)
+	//})
+
+	fmt.Println(bst.Contains(8))
+
+	bst.RemoveMax()
+
+	fmt.Println(bst.Contains(8))
+	fmt.Println(bst.ToString())
+	//
+	//bst.RemoveMini()
+	//fmt.Println(bst.ToString())
+	//
+	//bst.RemoveMini()
+	//fmt.Println(bst.ToString())
+	//bst.RemoveMini()
+	//fmt.Println(bst.ToString())
 }
 
 func sum(arr []int, index int) int {

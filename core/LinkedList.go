@@ -91,6 +91,21 @@ func (link *LinkedList) Contains(e interface{}) bool {
 	return false
 }
 
+func (link *LinkedList) RemoveElement(e interface{}) interface{} {
+	cur := link.dummyHead
+	for cur.Next != nil {
+		if cur.Next.E == e {
+			removeNode := cur.Next
+			cur.Next = removeNode.Next
+			removeNode.Next = nil
+			link.size--
+			return removeNode.E
+		}
+		cur = cur.Next
+	}
+	return false
+}
+
 func (link *LinkedList) Remove(index int) interface{} {
 	if index < 0 || index >= link.size {
 		panic("Remove failed, index illegal.")

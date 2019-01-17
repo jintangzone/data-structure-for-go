@@ -2,11 +2,13 @@ package main
 
 import (
 	"data_structure/core"
+	"data_structure/dict"
 	"data_structure/linear"
 	"data_structure/set"
 	"data_structure/tree"
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -56,12 +58,58 @@ func main() {
 	// testSet()
 
 	// BST Set VS Linked Set
-	bstSet := set.NewBSTSet()
-	fmt.Printf("BST set, execute: %.4f \n", testSetTime(bstSet, 100000))
-	linkSet := set.NewLinkedSet()
-	fmt.Printf("Linked set, execute: %.4f \n", testSetTime(linkSet, 100000))
+	//bstSet := set.NewBSTSet()
+	//fmt.Printf("BST set, execute: %.4f \n", testSetTime(bstSet, 100000))
+	//linkSet := set.NewLinkedSet()
+	//fmt.Printf("Linked set, execute: %.4f \n", testSetTime(linkSet, 100000))
+
+	// testDict
+	// testDict()
+
+	// BST Set VS Linked Set
+	bstDict := dict.NewBSTDict()
+	fmt.Printf("BST dict, execute: %.4f \n", testDictTime(bstDict, 100000))
+	linkDict := dict.NewLinkedDict()
+	fmt.Printf("Linked dict, execute: %.4f \n", testDictTime(linkDict, 100000))
 
 }
+
+func testDictTime(dict core.Dict, opCount int) float32 {
+
+	startTime := time.Now().UnixNano()
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		v := r.Intn(opCount)
+		dict.Add(strconv.Itoa(v), v)
+	}
+	endTime := time.Now().UnixNano()
+	return float32(endTime-startTime)/1000000000.0
+
+}
+
+func testDict()  {
+
+	data := []string{"php", "java", "python", "ruby", "object-c", "cpp", "clang", "golang"}
+
+	linkedDict := dict.NewLinkedDict()
+	for _, word := range data {
+		linkedDict.Add(word, len(word))
+	}
+
+	fmt.Println("size: ", linkedDict.GetSize())
+	fmt.Println("len of 'php': ", linkedDict.Get("php"))
+	fmt.Println("len of 'java': ", linkedDict.Get("java"))
+
+	BSTDict := dict.NewBSTDict()
+	for _, word := range data {
+		BSTDict.Add(word, len(word))
+	}
+
+	fmt.Println("size: ", BSTDict.GetSize())
+	fmt.Println("len of 'php': ", BSTDict.Get("php"))
+	fmt.Println("len of 'java': ", BSTDict.Get("java"))
+}
+
 func testSetTime(s core.Set, opCount int) float32 {
 	startTime := time.Now().UnixNano()
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))

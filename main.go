@@ -3,6 +3,7 @@ package main
 import (
 	"data_structure/core"
 	"data_structure/dict"
+	"data_structure/heap"
 	"data_structure/linear"
 	"data_structure/set"
 	"data_structure/tree"
@@ -67,10 +68,40 @@ func main() {
 	// testDict()
 
 	// BST Set VS Linked Set
-	bstDict := dict.NewBSTDict()
-	fmt.Printf("BST dict, execute: %.4f \n", testDictTime(bstDict, 100000))
-	linkDict := dict.NewLinkedDict()
-	fmt.Printf("Linked dict, execute: %.4f \n", testDictTime(linkDict, 100000))
+	//bstDict := dict.NewBSTDict()
+	//fmt.Printf("BST dict, execute: %.4f \n", testDictTime(bstDict, 100000))
+	//linkDict := dict.NewLinkedDict()
+	//fmt.Printf("Linked dict, execute: %.4f \n", testDictTime(linkDict, 100000))
+
+	// heap
+
+	testMaxArrayHeap()
+}
+
+func testMaxArrayHeap()  {
+
+	opCount := 100000
+
+	mah := heap.NewMaxArrayHeap(opCount)
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		v := r.Intn(opCount)
+		mah.Add(v)
+	}
+
+	arr := make([]int, opCount)
+	for i := 0; i < opCount; i++ {
+		arr[i] = mah.ExtractMax()
+	}
+
+	for i := 1; i < opCount; i++ {
+		if arr[i-1] < arr[i] {
+			panic("Err")
+		}
+	}
+
+	fmt.Println("Test MaxHeap Completed.")
 
 }
 

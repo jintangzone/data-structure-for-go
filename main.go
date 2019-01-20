@@ -74,8 +74,37 @@ func main() {
 	//fmt.Printf("Linked dict, execute: %.4f \n", testDictTime(linkDict, 100000))
 
 	// heap
+	// testMaxArrayHeap()
 
-	testMaxArrayHeap()
+	testHeapify()
+}
+
+func testHeapify()  {
+
+	opCount := 100000000
+
+	arr := make([]int, opCount)
+
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < opCount; i++ {
+		v := r.Intn(opCount)
+		arr[i] = v
+	}
+
+	mah1 := heap.NewMaxArrayHeap(opCount)
+
+	startTime := time.Now().UnixNano()
+	for i := 0; i < opCount; i++ {
+		mah1.Add(arr[i])
+	}
+	endTime := time.Now().UnixNano()
+	fmt.Printf("add execute times: %.4fs \n", float32(endTime-startTime)/1000000000.0)
+
+	startTime = time.Now().UnixNano()
+	heap.NewMaxArrayHeapFromArr(arr)
+	endTime = time.Now().UnixNano()
+	fmt.Printf("heapify execute times: %.4fs \n", float32(endTime-startTime)/1000000000.0)
+
 }
 
 func testMaxArrayHeap()  {

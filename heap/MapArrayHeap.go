@@ -32,6 +32,13 @@ func (mah *MaxArrayHeap) FindMax() int {
 	return mah.data[0]
 }
 
+func (mah *MaxArrayHeap) Replace(e int) int {
+	ret := mah.FindMax()
+	mah.data[0] = e
+	mah.siftDown(0)
+	return ret
+}
+
 func (mah *MaxArrayHeap) parent(index int) int {
 	if index == 0 {
 		panic("index-0 doesn't have parent.")
@@ -100,4 +107,12 @@ func NewMaxArrayHeap(capacity int) *MaxArrayHeap {
 	return &MaxArrayHeap{
 		data: make([]int, capacity),
 	}
+}
+
+func NewMaxArrayHeapFromArr(arr []int) *MaxArrayHeap {
+	mah := &MaxArrayHeap{ data: arr }
+	for i := mah.parent(len(mah.data)-1); i >= 0; i-- {
+		mah.siftDown(i)
+	}
+	return mah
 }

@@ -76,7 +76,20 @@ func main() {
 	// heap
 	// testMaxArrayHeap()
 
-	testHeapify()
+	//testHeapify()
+
+	// test segment tree
+	testSegmentTree()
+}
+
+func testSegmentTree()  {
+
+	arr := []int{-2, 0, 3, -5, 2, -1}
+
+	st := tree.NewSegmentTree(arr)
+
+	fmt.Println(st.Query(0, 5))
+
 }
 
 func testHeapify()  {
@@ -208,6 +221,12 @@ func testBSTree()  {
 		bst.Add(n)
 	}
 
+	bst.LevelOrder(func(e interface{}) {
+
+		fmt.Println(e)
+
+	})
+
 	//bst.PreOrderNR(func(e interface{}) {
 	//	fmt.Println(e)
 	//})
@@ -221,13 +240,13 @@ func testBSTree()  {
 	//bst.BackOrder(func(e interface{}) {
 	//	fmt.Println(e)
 	//})
-
-	fmt.Println(bst.Contains(8))
-
-	bst.RemoveMax()
-
-	fmt.Println(bst.Contains(8))
-	fmt.Println(bst.ToString())
+	//
+	//fmt.Println(bst.Contains(8))
+	//
+	//bst.RemoveMax()
+	//
+	//fmt.Println(bst.Contains(8))
+	//fmt.Println(bst.ToString())
 	//
 	//bst.RemoveMini()
 	//fmt.Println(bst.ToString())

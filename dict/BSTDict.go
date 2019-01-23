@@ -172,7 +172,7 @@ func (ld *BSTDict) getNode(node *BSTDictNode, k interface{}) *BSTDictNode {
 
 func (ld *BSTDict) Set(k interface{}, v interface{}) {
 	node := ld.getNode(ld.root, k)
-	if node != nil {
+	if node == nil {
 		panic(fmt.Sprint(k) + " doesn't exist!")
 	}
 	node.v = v

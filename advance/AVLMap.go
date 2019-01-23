@@ -1,0 +1,40 @@
+package advance
+
+import "data_structure/core"
+
+type AVLMap struct {
+	avl *AVLTree
+}
+
+func (m *AVLMap) Add(k core.Key, v interface{}) {
+	m.avl.Add(k, v)
+}
+
+func (m *AVLMap) Remove(k core.Key) {
+	m.avl.Remove(k)
+}
+
+func (m *AVLMap) Contains(k core.Key) bool {
+	return m.avl.Contain(k)
+}
+
+func (m *AVLMap) Get(k core.Key) interface{} {
+	return m.avl.Get(k)
+}
+
+func (m *AVLMap) Set(k core.Key, v interface{}) {
+	m.avl.Set(k, v)
+}
+
+func (m *AVLMap) GetSize() int {
+	return m.GetSize()
+}
+
+func (m *AVLMap) IsEmpty() bool {
+	return m.IsEmpty()
+}
+
+func NewAVLMap() *AVLMap {
+	return &AVLMap{ avl: NewAVLTree() }
+}
+

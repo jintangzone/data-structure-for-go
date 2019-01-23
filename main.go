@@ -1,6 +1,7 @@
 package main
 
 import (
+	"data_structure/advance"
 	"data_structure/core"
 	"data_structure/dict"
 	"data_structure/heap"
@@ -79,7 +80,192 @@ func main() {
 	//testHeapify()
 
 	// test segment tree
-	testSegmentTree()
+	//testSegmentTree()
+
+	// test trie
+	// testTrie()
+
+	// test vs trie
+	//trieVsBSTSet()
+
+	// test UnionFindArr
+
+	// testUionFindArr()
+
+	// test avl
+	// testAVL()
+
+	// test AVLMap
+	testAVLMap()
+}
+
+func testAVLMap()  {
+
+	m := advance.NewAVLMap()
+
+	mp := map[myKey]string{
+		1 : "php",
+		2 : "java",
+	}
+
+	for k, v := range mp {
+		m.Add(k, v)
+	}
+
+	fmt.Println(m.Contains(myKey(1)))
+
+	fmt.Println(m.Get(myKey(2)))
+
+	m.Remove(myKey(2))
+
+	fmt.Println(m.Contains(myKey(2)))
+
+	m.Set(myKey(1), "golang")
+	fmt.Println(m.Get(myKey(1)))
+}
+
+type myKey int
+
+func (n myKey) Then(k core.Key) int {
+
+	if n < k.(myKey) {
+		return -1
+	} else if n > k.(myKey) {
+		return 1
+	}
+	return 0
+}
+
+func testAVL() {
+
+	avl := advance.NewAVLTree()
+
+	ks := []myKey{5,3,6,8,4,2}
+	vs := []string{"php", "java", "golang", "object-c", "cpp", "clang"}
+	for idx, k := range ks {
+		v := vs[idx]
+		avl.Add(k, v)
+	}
+
+	//fmt.Println("PreOrderNR:")
+	avl.InOrder(func(k core.Key, v interface{}) {
+		fmt.Println(k, "=>", v)
+	})
+
+	fmt.Println("is BST:", avl.IsBST())
+	fmt.Println("is Balanced:", avl.IsBalanced())
+	//fmt.Println()
+	//
+	//fmt.Println("LevelOrderNR:")
+	//avl.LevelOrder(func(e advance.E) {
+	//	node := e.(*myNode)
+	//	fmt.Println(node.k, "=>", node.v)
+	//})
+	//
+	//fmt.Println()
+	//
+	//max := avl.Maximum().(*myNode)
+	//fmt.Println("max:", max.k, "=>", max.v)
+	//
+	//min := avl.Minimum().(*myNode)
+	//fmt.Println("min:", min.k, "=>", min.v)
+	//
+	//avl.RemoveMax()
+	//avl.RemoveMin()
+	//
+	//avl.PreOrder(func(e advance.E) {
+	//	node := e.(*myNode)
+	//	fmt.Println(node.k, "=>", node.v)
+	//})
+	//
+	//fmt.Println()
+	//
+	//avl.Remove(&myNode{k: 4})
+	//
+	//avl.PreOrder(func(e advance.E) {
+	//	node := e.(*myNode)
+	//	fmt.Println(node.k, "=>", node.v)
+	//})
+}
+
+func testUionFindArr()  {
+
+	uf := advance.NewUnionFindArr(10)
+
+	fmt.Println(uf.ToString())
+	fmt.Println(uf.IsConnected(1, 2))
+	uf.Union(1, 2)
+	fmt.Println(uf.ToString())
+	fmt.Println(uf.IsConnected(1, 2))
+	uf.Union(2, 3)
+	fmt.Println(uf.ToString())
+
+}
+
+//生成随机字符串
+func GetRandomString(l int64) string{
+	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	bytes := []byte(str)
+	result := []byte{}
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	var i int64
+	for i = 0 ; i < l; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
+	}
+	return string(result)
+}
+
+func trieVsBSTSet()  {
+
+	//s := set.NewBSTSet()
+	t := advance.NewTrie()
+
+	opCount := 100000
+
+	arr := make([]string, 0)
+	for i := 0; i < opCount; i++ {
+		arr = append(arr, GetRandomString(5))
+	}
+
+	startTime := time.Now().UnixNano()
+	//for _, word := range arr  {
+	//	s.Add(word)
+	//}
+	//for _, word := range arr  {
+	//	s.Contains(word)
+	//}
+	endTime := time.Now().UnixNano()
+	//fmt.Printf("BSTSet execute times: %.4fs \n", float32(endTime-startTime)/1000000000.0)
+
+	startTime = time.Now().UnixNano()
+	for _, word := range arr  {
+		t.Add(word)
+	}
+	for _, word := range arr  {
+		t.Contains(word)
+	}
+	endTime = time.Now().UnixNano()
+	fmt.Printf("Trie execute times: %.4fs \n", float32(endTime-startTime)/1000000000.0)
+
+}
+
+func testTrie() {
+	words := []string{
+		"java",
+		"php",
+		"hello",
+		"world",
+	}
+
+	t := advance.NewTrie()
+
+	for _, str := range words {
+		t.Add(str)
+	}
+
+	fmt.Println(t.Contains("php"))
+	fmt.Println(t.Contains("java"))
+	fmt.Println(t.Contains("cpp"))
 }
 
 func testSegmentTree()  {

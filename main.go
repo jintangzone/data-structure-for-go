@@ -136,6 +136,10 @@ func (n myKey) Then(k core.Key) int {
 	return 0
 }
 
+func (n myKey) HashCode() int {
+	return int(n)
+}
+
 func testAVL() {
 
 	avl := advance.NewAVLTree()

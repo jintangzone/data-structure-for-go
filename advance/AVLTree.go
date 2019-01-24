@@ -147,8 +147,10 @@ func (avl *AVLTree) add(node *AVLTreeNode, k core.Key, v interface{}) *AVLTreeNo
 	return node
 }
 
-func (avl *AVLTree) Remove(k core.Key) {
+func (avl *AVLTree) Remove(k core.Key) interface{} {
+	ret := avl.Get(k)
 	avl.root = avl.remove(avl.root, k)
+	return ret
 }
 
 func (avl *AVLTree) remove(node *AVLTreeNode, k core.Key) *AVLTreeNode {

@@ -10,8 +10,8 @@ func (m *AVLMap) Add(k core.Key, v interface{}) {
 	m.avl.Add(k, v)
 }
 
-func (m *AVLMap) Remove(k core.Key) {
-	m.avl.Remove(k)
+func (m *AVLMap) Remove(k core.Key) interface{} {
+	return m.avl.Remove(k)
 }
 
 func (m *AVLMap) Contains(k core.Key) bool {
@@ -24,6 +24,14 @@ func (m *AVLMap) Get(k core.Key) interface{} {
 
 func (m *AVLMap) Set(k core.Key, v interface{}) {
 	m.avl.Set(k, v)
+}
+
+func (m *AVLMap) KeySet() []core.Key {
+	keySets := make([]core.Key, 0)
+	m.avl.LevelOrder(func(k core.Key, v interface{}) {
+		keySets = append(keySets, k)
+	})
+	return keySets
 }
 
 func (m *AVLMap) GetSize() int {
